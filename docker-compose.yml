@@ -14,35 +14,23 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
-    - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
-    - ./vendor/OCA/web:/mnt/addons/web
-    - ./vendor/OCA/queue:/mnt/addons/queue
-    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
+    - ./vendor/eugene/private-iterativo:/mnt/addons/private
 
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
-    - ODOO_QUEUE_JOB_HOST=saas.127.0.0.1.nip.io
+    - GOOGLE_APPLICATION_CREDENTIALS=/etc/odoo/gcs.json
+    - GCS_BUCKETNAME=it-projects-llc-test-bucket
+
 
 services:
-  dev:
-    <<: *default-odoo
-    command: ['--db-filter=.*']
-
   odoo:
-    << : *default-odoo
-    # TODO: unify parameter passing for different cases to avoid making different branches
-    # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas', '--init', 'saas_demo', '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
-              '--log-handler=odoo.addons.queue_job:DEBUG',
+    <<: *default-odoo
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '-d', 'gcs', '--init', 'ir_attachment_google_cloud_storage',
+    '--log-handler=odoo.addons.ir_attachment_google_cloud_storage:DEBUG',
     ]
-#'--log-handler=odoo.models:DEBUG',
-#'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
-#'--log-handler=odoo.modules.registry:DEBUG',
-#'--log-handler=odoo.fields:DEBUG',
-#'--log-handler=odoo.modules.loading:DEBUG',
-#'--log-handler=odoo.addons.queue_job:DEBUG',
+
   db:
     image: postgres:10
     environment:
