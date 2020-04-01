@@ -14,10 +14,11 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ~/Projects/c13/vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
-    - ~/Projects/c13/vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
-    - ~/Projects/c13/vendor/OCA/web:/mnt/addons/web
-    - ~/Projects/c13/vendor/OCA/queue:/mnt/addons/queue
+    - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
+    - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
+    - ./vendor/OCA/web:/mnt/addons/web
+    - ./vendor/OCA/queue:/mnt/addons/queue
+    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
 
   environment:
     - WDB_SOCKET_SERVER=wdb
