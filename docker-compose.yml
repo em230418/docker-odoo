@@ -8,22 +8,19 @@ x-default:
     - db
     - wdb
     - proxy
+    - smtpfake
   ports:
     - "8069:8069"
     - "8072:8072"
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
-    - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
-    - ./vendor/OCA/web:/mnt/addons/web
-    - ./vendor/OCA/queue:/mnt/addons/queue
-    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
+    - ./vendor/OCA/contract:/mnt/addons/contract
+    - ./vendor/eugene/private-k3zone:/mnt/addons/k3zone
 
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
-    - ODOO_QUEUE_JOB_HOST=saas.127.0.0.1.nip.io
 
 services:
   dev:
@@ -32,10 +29,8 @@ services:
 
   odoo:
     << : *default-odoo
-    # TODO: unify parameter passing for different cases to avoid making different branches
-    # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas', '-i', 'saas_limit_max_users_master', '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
-              '--log-handler=odoo.addons.queue_job:DEBUG',
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'k3zone.127.0.0.1.nip.io', '-i', 'saas_setup', '--db-filter=^%h$$', '--workers=3',
+              '--log-handler=odoo.addons.saas_setup:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
@@ -62,6 +57,8 @@ services:
   wdb:
     image: kozea/wdb:3.3.0
     ports: ['1984:1984']
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
