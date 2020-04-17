@@ -14,7 +14,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
+    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -23,8 +23,9 @@ x-default:
 services:
   odoo:
     << : *default-odoo
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'web_image_cache', '--init', 'web_image_cache,website_sale',
-   '--log-handler=odoo.addons.web_image_cache:DEBUG',
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '-d', 'mail_to', '--init', 'mail_to',
+    '--log-handler=odoo.addons.mail_to:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
