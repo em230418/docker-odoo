@@ -23,8 +23,10 @@ x-default:
 services:
   odoo:
     << : *default-odoo
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'web_image_cache', '--init', 'web_image_cache,website_sale',
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'web_image_cache', '--init', 'web_image_cache,ir_attachment_url,ir_attachment_s3,website_sale',
    '--log-handler=odoo.addons.web_image_cache:DEBUG',
+   '--log-handler=odoo.addons.ir_attachment_url:DEBUG',
+   '--log-handler=odoo.addons.ir_attachment_s3:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
