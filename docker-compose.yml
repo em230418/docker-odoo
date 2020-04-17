@@ -14,21 +14,19 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/eugene/private-iterativo:/mnt/addons/private
+    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
-    - GOOGLE_APPLICATION_CREDENTIALS=/etc/odoo/gcs.json
-    - GCS_BUCKETNAME=it-projects-llc-test-bucket
 
 
 services:
   odoo:
     <<: *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'gcs', '--init', 'ir_attachment_google_cloud_storage',
-    '--log-handler=odoo.addons.ir_attachment_google_cloud_storage:DEBUG',
+    '-d', 'mail_to', '--init', 'mail_to',
+    '--log-handler=odoo.addons.mail_to:DEBUG',
     ]
 
   db:
