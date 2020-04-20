@@ -8,6 +8,7 @@ x-default:
     - db
     - wdb
     - proxy
+    - smtpfake
   ports:
     - "8069:8069"
     - "8072:8072"
@@ -18,6 +19,7 @@ x-default:
     - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
     - ./vendor/OCA/web:/mnt/addons/web
     - ./vendor/OCA/queue:/mnt/addons/queue
+    - ./vendor/OCA/server-auth:/mnt/addons/server-auth
     - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
 
   environment:
@@ -62,6 +64,8 @@ services:
   wdb:
     image: kozea/wdb:3.3.0
     ports: ['1984:1984']
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
