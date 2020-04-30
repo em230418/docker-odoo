@@ -48,6 +48,7 @@ docker-compose up odoo
 - - Description: anything
 - - SMTP Port: 1025
 - - Save
+- Main menu -> Settings -> General settings -> Customer Account -> Free sign up
 - Logout or do everything else in Private Browsing (Incognito in Chromium-based) or in other browser
 
 - In other window go to http://saas.127.0.0.1.nip.io/price
