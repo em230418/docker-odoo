@@ -2,7 +2,7 @@
 # SaaS Demo deploy instruction
 
 ```
-git clone -b 12.0-saas --single-branch https://github.com/em230418/docker-odoo.git saas_odoo
+git clone -b 12.0-saas_production --single-branch https://github.com/em230418/docker-odoo.git saas_odoo
 cd saas_odoo
 mkdir vendor
 mkdir -p vendor/it-projects-llc
