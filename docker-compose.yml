@@ -7,18 +7,20 @@ x-default:
   depends_on:
     - db
     - wdb
+    - proxy
+    - smtpfake
   ports:
     - "8069:8069"
     - "8072:8072"
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ../access-addons:/mnt/addons/access-addons
-    - ../misc-addons:/mnt/addons/misc-addons
-    - ../saas-addons:/mnt/addons/saas-addons
-    - ../odoo/odoo/service/db.py:/usr/lib/python3/dist-packages/odoo/service/db.py
-    - ../odoo/odoo/modules/registry.py:/usr/lib/python3/dist-packages/odoo/modules/registry.py
-    - ../odoo/odoo/modules/loading.py:/usr/lib/python3/dist-packages/odoo/modules/loading.py
+    - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
+    - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
+    - ./vendor/OCA/web:/mnt/addons/web
+    - ./vendor/OCA/queue:/mnt/addons/queue
+    - ./vendor/OCA/server-auth:/mnt/addons/server-auth
+    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -38,18 +40,15 @@ services:
               '--log-handler=odoo.addons.saas:DEBUG',
     ]
 
-  web:
+  odoo:
     << : *default-odoo
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
-    command: ['-d', 'saas',
-              '--init', 'saas',
-              '--db-filter=^%d$$',
-              '--workers=0',
-              '--load=web,queue_job',]
-
-  #'--log-handler=odoo.addons.base.models.ir_module:DEBUG',
-#'--log-handler=odoo.modules.module:DEBUG',
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
+    '-i', 'saas_apps_signup,saas_access_apps_master',
+    '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
+              '--log-handler=odoo.addons.queue_job:DEBUG',
+    ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
 #'--log-handler=odoo.modules.registry:DEBUG',
@@ -65,9 +64,18 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - "5433:5432"
+
+  proxy:
+    image: envoyproxy/envoy-alpine:v1.10.0
+    ports: ['81:80', '80:80', '9901:9901']
+    volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
   wdb:
     image: kozea/wdb:3.3.0
     ports: ['1984:1984']
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
