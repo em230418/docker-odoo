@@ -40,12 +40,21 @@ services:
               '--log-handler=odoo.addons.saas:DEBUG',
     ]
 
+  test:
+    << : *default-odoo
+    command: [
+    '--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '-d', 'ttt',
+    '-i', 'access_limit_max_users',
+#    '--test-enable', '--stop-after-init',
+    ]
+
   odoo:
     << : *default-odoo
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-i', 'saas_apps_signup,saas_access_apps_master',
+    '-i', 'saas',
     '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
