@@ -14,6 +14,13 @@ static_resources:
     type: strict_dns
   - connect_timeout: 0.25s
     hosts:
+    - socket_address: {address: test, port_value: 8069}
+    lb_policy: round_robin
+    max_requests_per_connection: 1
+    name: target_test
+    type: strict_dns
+  - connect_timeout: 0.25s
+    hosts:
     - socket_address: {address: odoo-longpolling, port_value: 8072}
     lb_policy: round_robin
     max_requests_per_connection: 1
@@ -144,6 +151,11 @@ static_resources:
                     # consider using OCA/queue
                     timeout: 60s
                 }
+            - domains: [test.*]
+              name: local_service
+              routes:
+              - match: {prefix: /}
+                route: {cluster: target_test}
             - domains: [cdnjs.cloudflare.com]
               name: local_service
               routes:

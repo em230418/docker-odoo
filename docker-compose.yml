@@ -32,6 +32,14 @@ services:
     <<: *default-odoo
     command: ['--db-filter=.*']
 
+  test:
+    << : *default-odoo
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '-d', 'test_db',
+    '-i', 'access_limit_records_number',
+    '--test-enable', '--stop-after-init',
+    ]
+
   odoo:
     << : *default-odoo
     # TODO: unify parameter passing for different cases to avoid making different branches
