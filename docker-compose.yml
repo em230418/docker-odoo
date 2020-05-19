@@ -8,35 +8,39 @@ x-default:
     - db
     - wdb
     - proxy
+    - mariadb
   ports:
     - "8069:8069"
     - "8072:8072"
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
+    - ./vendor/eugene/private-bacula:/mnt/addons/private
 
   environment:
     - WDB_SOCKET_SERVER=wdb
     - WDB_NO_BROWSER_AUTO_OPEN=True
 
 services:
+  mariadb:
+    image: mariadb:10.1.44
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sugarcrm_db
+      MYSQL_USER: sugarcrm_user
+      MYSQL_PASSWORD: sugarcrm_password
+    ports: ['3306:3306']
+    volumes: ['msql:/var/lib/mysql']
+
   odoo:
     << : *default-odoo
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'web_image_cache',
-    '--init', 'ir_attachment_url,ir_attachment_s3',
-   '--log-handler=odoo.addons.web_image_cache:DEBUG',
-   '--log-handler=odoo.addons.ir_attachment_url:DEBUG',
-   '--log-handler=odoo.addons.ir_attachment_s3:DEBUG',
+    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '-d', 'suga',
+    '--init', 'sugarodoo,sugarcrm_to_sugarodoo',
+   '--log-handler=odoo.addons.sugarodoo:DEBUG',
+   '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
     ]
-#'--log-handler=odoo.addons.base.models.ir_module:DEBUG',
-#'--log-handler=odoo.modules.module:DEBUG',
-#'--log-handler=odoo.models:DEBUG',
-#'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
-#'--log-handler=odoo.modules.registry:DEBUG',
-#'--log-handler=odoo.fields:DEBUG',
-#'--log-handler=odoo.modules.loading:DEBUG',
-#'--log-handler=odoo.addons.queue_job:DEBUG',
   db:
     image: postgres:10
     environment:
@@ -60,3 +64,4 @@ services:
 volumes:
   odoo-web-data:
   odoo-db-data:
+  msql:
