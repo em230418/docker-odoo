@@ -46,7 +46,7 @@ services:
     command: [
     '--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'ttt',
-    '-i', 'access_limit_max_users',
+    '-i', 'saas_product',
 #    '--test-enable', '--stop-after-init',
     ]
 
@@ -55,7 +55,7 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-i', 'saas',
+    '-i', 'saas_contract',
     '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
