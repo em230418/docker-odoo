@@ -20,7 +20,6 @@ x-default:
     - ./vendor/OCA/web:/mnt/addons/web
     - ./vendor/OCA/queue:/mnt/addons/queue
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
-    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -37,7 +36,7 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-i', 'saas_apps_signup,saas_access_apps_master',
+    '-i', 'saas_apps_signup,saas_access_apps',
     '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
