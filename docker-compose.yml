@@ -20,6 +20,7 @@ x-default:
     - ./vendor/OCA/web:/mnt/addons/web
     - ./vendor/OCA/queue:/mnt/addons/queue
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
+    - ./vendor/OCA/contract:/mnt/addons/contract
 
   environment:
     - WDB_SOCKET_SERVER=wdb

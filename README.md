@@ -12,6 +12,7 @@ cd vendor/OCA
 git clone -b 13.0-auth_signup_verify_email_port https://github.com/em230418/server-auth.git --single-branch
 git clone -b 13.0 https://github.com/OCA/web.git --single-branch
 git clone -b patch-1 https://github.com/em230418/queue.git --single-branch
+git clone -b 13.0-mig-contract https://github.com/devCbssolutionsRo/contract.git --single-branch
 cd ../..
 
 cd vendor/it-projects-llc
