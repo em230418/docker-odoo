@@ -29,15 +29,20 @@ wait for installing, then press Ctrl+C in terminal and again:
 docker-compose up odoo
 ```
 
-- Go to http://saas.127.0.0.1.nip.io/web/login?debug=1
+- Go to `/web/login?debug=1`
 - admin:admin
 - Main menu -> Settings -> Technical -> Outgoing email servers
 - - SMTP Server: smtpfake
 - - Description: anything
 - - SMTP Port: 1025
 - - Save
+- In `/web#id=1&model=saas.operator&view_type=form` press `Edit`
+- - DB URLs. Probably http://{db_name}.mydomain.com
+- - Master URL. Probably http://saas.mydomain.com
+- - If you are using nip.io service - press Discard
+- - Else - press Save
 - Main menu -> Settings -> General settings -> Customer Account -> Free sign up -> Save
 - Main menu -> website -> configurations -> manage apps -> Refresh
 - Logout or do everything else in Private Browsing (Incognito in Chromium-based) or in other browser
 
-- In other window go to http://saas.127.0.0.1.nip.io/price
+- In other window go to `/price` page
