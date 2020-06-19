@@ -22,6 +22,9 @@ x-default:
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
     - ./vendor/OCA/contract:/mnt/addons/contract
     - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
+    - type: bind
+      source: ./host2db.ini
+      target: /var/lib/odoo/host2db.ini
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -55,9 +58,9 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-i', 'saas_contract',
-    '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
-              '--log-handler=odoo.addons.queue_job:DEBUG',
+#    '-i', 'saas_contract',
+    '--db-filter=^%d$$', '--load=web,queue_job,saas_domain_operator',  '--workers=3',
+    '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
