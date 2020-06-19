@@ -46,3 +46,27 @@ docker-compose up odoo
 - Logout or do everything else in Private Browsing (Incognito in Chromium-based) or in other browser
 
 - In other window go to `/price` page
+
+# Setting alternative domain
+
+For example, you have domain "mydomain.com" and your build name is "mybuild"
+
+1. Open host2db.ini, add line "mydomain.com = mybuild" in "mappings" section, Save
+2. Wait for 1 minute, until new changes will load
+3. In front server (nginx, envoy) add domain to section with odoo cluster. For example like this in envoy.yaml:
+
+```diff
+diff --git a/envoy.yaml b/envoy.yaml
+index ea4a6c6..4b1f2de 100644
+--- a/envoy.yaml
++++ b/envoy.yaml
+@@ -126,7 +126,7 @@ static_resources:
+               routes:
+               - match: {prefix: /}
+                 route: {cluster: target_filebrowser}
+-            - domains: [odoo.*, saas.em230418.new.it-projects.info, "*.saas.em230418.new.it-projects.info", "*.nip.io"]
++            - domains: [odoo.*, saas.em230418.new.it-projects.info, "*.saas.em230418.new.it-projects.info", "*.nip.io", mydomain.com]
+               name: local_service
+               routes:
+               - match: {prefix: /longpolling/}
+```
