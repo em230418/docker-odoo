@@ -20,6 +20,9 @@ x-default:
     - ./vendor/OCA/queue:/mnt/addons/queue
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
     - ./vendor/OCA/contract:/mnt/addons/contract
+    - type: bind
+      source: ./host2db.ini
+      target: /var/lib/odoo/host2db.ini
 
   environment:
     - ODOO_QUEUE_JOB_HOST=saas.127.0.0.1.nip.io
@@ -35,7 +38,7 @@ services:
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
     '-i', 'saas_apps_signup,saas_access_apps',
-    '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
+    '--db-filter=^%d$$', '--load=web,queue_job,saas_domain_operator',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
