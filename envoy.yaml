@@ -126,7 +126,7 @@ static_resources:
               routes:
               - match: {prefix: /}
                 route: {cluster: target_filebrowser}
-            - domains: [odoo.*, saas.em230418.new.it-projects.info, "*.saas.em230418.new.it-projects.info", "*.nip.io"]
+            - domains: [odoo.*, saas.em230418.dev.it-projects.info, "*.saas.em230418.dev.it-projects.info", "*.nip.io"]
               name: local_service
               routes:
               - match: {prefix: /longpolling/}
