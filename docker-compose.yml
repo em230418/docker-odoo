@@ -49,7 +49,7 @@ services:
     command: [
     '--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'ttt',
-    '-i', 'saas_product',
+    '-i', 'saas_client_custom',
 #    '--test-enable', '--stop-after-init',
     ]
 
