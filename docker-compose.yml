@@ -25,6 +25,10 @@ x-default:
     - type: bind
       source: ./host2db.ini
       target: /var/lib/odoo/host2db.ini
+    - type: bind
+      source: ./vendor/odoo
+      target: /usr/lib/python3/dist-packages/odoo
+
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -49,8 +53,9 @@ services:
     command: [
     '--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'ttt',
-    '-i', 'saas_client_custom',
-#    '--test-enable', '--stop-after-init',
+    '-i', 'access_limit_max_users',
+#    '-i', 'access_limit_records_number',
+    '--test-enable', '--stop-after-init',
     ]
 
   odoo:
