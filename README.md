@@ -42,6 +42,7 @@ docker-compose up odoo
 - - If you are using nip.io service - press Discard
 - - Else - press Save
 - Main menu -> Settings -> General settings -> Customer Account -> Free sign up -> Save
+- Main menu -> Settings -> Invoicing -> Customer Payments -> Invoice online payments (on) -> Save
 - Main menu -> website -> configurations -> manage apps -> Refresh
 - Logout or do everything else in Private Browsing (Incognito in Chromium-based) or in other browser
 
