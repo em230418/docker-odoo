@@ -16,7 +16,7 @@ git clone -b 13.0-mig-contract https://github.com/devCbssolutionsRo/contract.git
 cd ../..
 
 cd vendor/it-projects-llc
-git clone -b 13.0-database_block https://github.com/itpp-labs/access-addons.git
+git clone -b 13.0-database_block https://github.com/em230418/access-addons.git
 git clone -b 13.0-saas_apps_signup https://github.com/em230418/saas-addons.git
 cd ../..
 
