@@ -19,6 +19,7 @@ x-default:
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
+    - ./vendor/it-projects-llc/odoo-saas-tools:/mnt/addons/odoo-saas-tools
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -28,9 +29,9 @@ services:
   odoo:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'mail_multi_website2',
-    '--init', 'mail_multi_website',
-    '--log-handler=odoo.addons.mail_multi_website:DEBUG',
+    '--db-filter=^%d$$',
+    '--log-handler=odoo.addons.saas_portal:DEBUG',
+    '--log-handler=odoo.addons.saas_server:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
