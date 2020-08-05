@@ -21,7 +21,7 @@ x-default:
     - ./vendor/OCA/queue:/mnt/addons/queue
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
     - ./vendor/OCA/contract:/mnt/addons/contract
-    - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
+    - ./vendor/eugene/public-mixin-bug:/mnt/addons/backend_theme
     - type: bind
       source: ./host2db.ini
       target: /var/lib/odoo/host2db.ini
@@ -52,10 +52,11 @@ services:
     << : *default-odoo
     command: [
     '--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'ttt',
-    '-i', 'saas_product',
+    '-d', 'mixinttt',
+    '-u', 'mixin_test',
 #    '-i', 'access_limit_records_number',
 #    '--test-enable', '--stop-after-init',
+    '--stop-after-init',
     ]
 
   odoo:
@@ -63,7 +64,7 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-#    '-i', 'saas_contract',
+#    '-u', 'saas_apps_signup',
     '--db-filter=^%d$$', '--load=web,queue_job,saas_domain_operator',  '--workers=3',
     '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
