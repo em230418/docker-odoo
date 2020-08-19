@@ -17,6 +17,7 @@ x-default:
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
     - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
+    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
     - ./vendor/OCA/web:/mnt/addons/web
     - ./vendor/OCA/queue:/mnt/addons/queue
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
