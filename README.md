@@ -17,6 +17,7 @@ cd ../..
 
 cd vendor/it-projects-llc
 git clone -b 13.0 https://github.com/itpp-labs/access-addons.git
+git clone -b 13.0-odoo_backup_sh-103 https://github.com/em230418/misc-addons.git
 git clone -b 13.0-saas_apps_signup https://github.com/em230418/saas-addons.git
 cd ../..
 
