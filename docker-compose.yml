@@ -16,6 +16,7 @@ x-default:
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
+    - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -26,8 +27,9 @@ services:
   odoo:
     <<: *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'test2', '--init', 'pos_invoice_pay',
-    '--log-handler=odoo.addons.base:DEBUG',
+    '-d', 'test2',
+    '--init', 'website_sale_checkout_store',
+    '--log-handler=odoo.addons.website_sale_checkout_store:DEBUG',
     ]
 
   db:
