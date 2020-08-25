@@ -17,6 +17,7 @@ x-default:
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
+    - ./vendor/OCA/pos:/mnt/addons/pos
 
   environment:
     - WDB_SOCKET_SERVER=wdb
