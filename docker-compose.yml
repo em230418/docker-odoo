@@ -15,10 +15,6 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
     - ./vendor/eugene/private-bacula:/mnt/addons/private
-    - type: bind
-      source: ./vendor/odoo
-      target: /usr/lib/python3/dist-packages/odoo
-
 
   environment:
     - WDB_SOCKET_SERVER=wdb
