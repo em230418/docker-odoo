@@ -8,6 +8,7 @@ x-default:
     - db
     - wdb
     - proxy
+    - mariadb
   ports:
     - "8069:8069"
     - "8072:8072"
