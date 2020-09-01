@@ -15,6 +15,7 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
+    - ./vendor/eugene/private-bluemon:/mnt/addons/private
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -24,9 +25,9 @@ services:
   odoo:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'pos_order_cancel_restaurant_test',
-    '--init', 'pos_order_cancel_restaurant',
-    '--log-handler=odoo.addons.pos_order_cancel_restaurant:DEBUG',
+    '-d', 'qpay',
+    '--init', 'payment_qpay',
+    '--log-handler=odoo.addons.payment_qpay:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
