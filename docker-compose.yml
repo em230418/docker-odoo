@@ -14,7 +14,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
+    - ./vendor/eugene/private-abdulrahman:/mnt/addons/private
 
   environment:
     - WDB_SOCKET_SERVER=wdb
