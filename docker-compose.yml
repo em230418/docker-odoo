@@ -24,9 +24,9 @@ services:
   odoo:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'pos_order_cancel_restaurant_test',
-    '--init', 'pos_order_cancel_restaurant',
-    '--log-handler=odoo.addons.pos_order_cancel_restaurant:DEBUG',
+    '-d', 'abdulrahman',
+    '--init', 'pos_qitaf_payment',
+    '--log-handler=odoo.addons.pos_qitaf_payment:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
