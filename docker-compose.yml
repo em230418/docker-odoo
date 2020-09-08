@@ -30,6 +30,7 @@ services:
   odoo:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '--load', 'web,letsencrypt',
     '--db-filter=^%d$$',
     '--log-handler=odoo.addons.saas_portal:DEBUG',
     '--log-handler=odoo.addons.saas_server:DEBUG',
