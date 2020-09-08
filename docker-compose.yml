@@ -14,6 +14,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
+    - ./vendor/OCA/server-tools:/mnt/addons/server-tools
     - ./vendor/OCA/website:/mnt/addons/website
     - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
