@@ -25,10 +25,10 @@ services:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'gmk',
-    '-u', 'mail',
-#    '-i', 'crm,mail_activity_type_hours_minutes',
+    '-u', 'mail_activity_type_hours_minutes',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.crm:DEBUG',
+   '--log-handler=odoo.addons.mail_activity_type_hours_minutes:DEBUG',
     ]
 
   db:
