@@ -8,6 +8,7 @@ x-default:
     - db
     - wdb
     - proxy
+    - smtpfake
   ports:
     - "8069:8069"
     - "8072:8072"
@@ -52,6 +53,8 @@ services:
   wdb:
     image: kozea/wdb:3.3.0
     ports: ['1984:1984']
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
