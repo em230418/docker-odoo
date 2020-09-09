@@ -17,6 +17,7 @@ x-default:
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
+    - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
     - ./vendor/OCA/pos:/mnt/addons/pos
 
@@ -29,9 +30,9 @@ services:
   odoo:
     <<: *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'test2',
-    '--init', 'website_sale_checkout_store',
-    '--log-handler=odoo.addons.website_sale_checkout_store:DEBUG',
+    '-d', 'openapi_test',
+    '--init', 'openapi',
+    '--log-handler=odoo.addons.openapi:DEBUG',
     ]
 
   db:
