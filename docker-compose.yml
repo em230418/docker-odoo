@@ -9,6 +9,7 @@ x-default:
     - wdb
     - proxy
     - mariadb
+    - smtpfake
   ports:
     - "8069:8069"
     - "8072:8072"
@@ -16,9 +17,6 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
     - ./vendor/eugene/private-bacula:/mnt/addons/private
-    - type: bind
-      source: ./vendor/odoo
-      target: /usr/lib/python3/dist-packages/odoo
 
 
   environment:
@@ -64,6 +62,8 @@ services:
   wdb:
     image: kozea/wdb:3.3.0
     ports: ['1984:1984']
+  smtpfake: {image: mailhog/mailhog}
+
 
 volumes:
   odoo-web-data:
