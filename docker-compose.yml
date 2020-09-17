@@ -15,11 +15,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
-    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
     - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
-    - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
-    - ./vendor/OCA/pos:/mnt/addons/pos
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -32,6 +28,7 @@ services:
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'openapi_test',
     '--init', 'openapi',
+    '--test-enable', '--stop-after-init',
     '--log-handler=odoo.addons.openapi:DEBUG',
     ]
 
