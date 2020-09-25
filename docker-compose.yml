@@ -25,9 +25,9 @@ services:
   odoo:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'document_extension',
-    '--init', 'document_extension',
-    '--log-handler=odoo.addons.document_extension:DEBUG',
+    '-d', 'sirum281',
+    '-u', 'drag_and_drop_widget',
+    '--log-handler=odoo.addons.drag_and_drop_widget:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
 #'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
