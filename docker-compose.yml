@@ -7,7 +7,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
-    - ./vendor/odoo/addons:/var/lib/odoo/addons/13.0
+    - ./vendor/odoo/addons:/var/lib/odoo/addons/12.0
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
