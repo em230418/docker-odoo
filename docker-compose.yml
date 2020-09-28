@@ -9,6 +9,7 @@ x-default:
     - wdb
     - proxy
     - smtpfake
+    - odoo2
   ports:
     - "8069:8069"
     - "8072:8072"
@@ -37,6 +38,25 @@ x-default:
     - ODOO_QUEUE_JOB_HOST=saas.127.0.0.1.nip.io
 
 services:
+  odoo2:
+    tty: true
+    build: .
+    depends_on:
+      - db
+      - wdb
+    ports:
+      - "83:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config2:/etc/odoo
+      - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
+      - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
+      - ./vendor/OCA/web:/mnt/addons/web
+    command:
+      - --db-filter=.*
+      - --workers=0
+      - --load=web,saas_operator_remote
+
   dev:
     <<: *default-odoo
     command: ['-d', 'saas_test',
@@ -66,7 +86,7 @@ services:
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
 #    '-u', 'queue_job',
-    '--db-filter=^%d$$', '--load=web,queue_job,saas_domain_operator,saas_operator_remote',  '--workers=3',
+    '--db-filter=^%d$$', '--load=web,queue_job,saas_domain_operator',  '--workers=3',
     '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
