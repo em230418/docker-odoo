@@ -15,11 +15,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
-    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
-    - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
-    - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
-    - ./vendor/OCA/pos:/mnt/addons/pos
+    - ./vendor/k3zone/pos-custom-addons:/mnt/addons/pos-custom-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -30,9 +26,9 @@ services:
   odoo:
     <<: *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'openapi_test',
-    '--init', 'openapi',
-    '--log-handler=odoo.addons.openapi:DEBUG',
+    '-d', 'k3zone_pos1',
+    '--init', 'flexibite_com_advance',
+    '--log-handler=odoo.addons.flexibite_com_advance:DEBUG',
     ]
 
   db:
