@@ -14,6 +14,7 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
+    - ./vendor/OCA/server-tools:/mnt/addons/server-tools
     - ./vendor/OCA/social:/mnt/addons/social
     - ./vendor/agenterp/essentials:/mnt/addons/essentials
 
