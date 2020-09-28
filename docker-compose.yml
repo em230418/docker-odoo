@@ -4,15 +4,10 @@ x-default:
   &default-odoo
   tty: true
   build: .
-  depends_on:
-    - db
-    - wdb
-    - proxy
-  ports:
-    - "8069:8069"
-    - "8072:8072"
   volumes:
     - odoo-web-data:/var/lib/odoo
+    - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
+    - ./vendor/odoo/addons:/var/lib/odoo/addons/11.0
     - ./config:/etc/odoo
     - ./vendor/OCA/server-tools:/mnt/addons/server-tools
     - ./vendor/OCA/social:/mnt/addons/social
@@ -25,17 +20,27 @@ x-default:
 services:
   odoo:
     << : *default-odoo
+    depends_on:
+      - db
+      - wdb
+      - proxy
+      - odoo-longpolling
+      - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'sirum281',
     '-u', 'drag_and_drop_widget',
     '--log-handler=odoo.addons.drag_and_drop_widget:DEBUG',
+#    '--test-enable', '--stop-after-init',
     ]
-#'--log-handler=odoo.models:DEBUG',
-#'--log-handler=odoo.addons.base.models.ir_cron:DEBUG',
-#'--log-handler=odoo.modules.registry:DEBUG',
-#'--log-handler=odoo.fields:DEBUG',
-#'--log-handler=odoo.modules.loading:DEBUG',
-#'--log-handler=odoo.addons.queue_job:DEBUG',
+
+  odoo-longpolling:
+    << : *default-odoo
+    depends_on:
+      - db
+      - wdb
+      - proxy
+    command: ['odoo', 'gevent', '--dev', 'wdb,reload,qweb,werkzeug,xml']
+
   db:
     image: postgres:10
     environment:
@@ -50,11 +55,14 @@ services:
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['81:80', '80:80', '9901:9901']
+    ports: ['80:80', '9901:9901']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
+
   wdb:
     image: kozea/wdb:3.3.0
-    ports: ['1984:1984']
+
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
