@@ -30,7 +30,7 @@ services:
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'openapi_test',
-    '-i', 'openapi',
+    '-i', 'pos_mobile',
 #    '--test-enable', '--stop-after-init',
     '--log-handler=odoo.addons.openapi:DEBUG',
     ]
