@@ -9,7 +9,6 @@ x-default:
     - wdb
     - proxy
     - smtpfake
-    - odoo2
   ports:
     - "8069:8069"
     - "8072:8072"
@@ -27,9 +26,6 @@ x-default:
     - type: bind
       source: ./host2db.ini
       target: /var/lib/odoo/host2db.ini
-    - type: bind
-      source: ./vendor/odoo
-      target: /usr/lib/python3/dist-packages/odoo
 
 
   environment:
@@ -67,17 +63,6 @@ services:
               '--test-enable',
               '--log-handler=odoo.addons.queue_job:DEBUG',
               '--log-handler=odoo.addons.saas:DEBUG',
-    ]
-
-  test:
-    << : *default-odoo
-    command: [
-    '--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'mixinttt',
-    '-u', 'mixin_test',
-#    '-i', 'access_limit_records_number',
-#    '--test-enable', '--stop-after-init',
-    '--stop-after-init',
     ]
 
   odoo:
