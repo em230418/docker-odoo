@@ -6,4 +6,5 @@ RUN python3 -m pip install python-gitlab
 RUN python3 -m pip install markdownify
 RUN python3 -m pip install requests-toolbelt
 RUN python3 -m pip install bigbluebutton-api-python
+RUN python3 -m pip install pycryptodome
 USER odoo
