@@ -8,6 +8,7 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/pp/poshworker:/mnt/addons/poshworker
     - ./config:/etc/odoo
 
   environment:
@@ -22,12 +23,10 @@ services:
       - wdb
       - proxy
       - odoo-longpolling
-      - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    '-d', 'poshworker',
+    '-i', 'pos_debt_notebook',
 #    '--test-enable', '--stop-after-init',
-   '--log-handler=odoo.addons.stock:DEBUG',
     ]
 
   odoo-longpolling:
