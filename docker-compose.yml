@@ -9,11 +9,7 @@ x-default:
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/var/lib/odoo/addons/12.0
     - ./config:/etc/odoo
-    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
-    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
-    - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
-    - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
-    - ./vendor/OCA/pos:/mnt/addons/pos
+    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -27,12 +23,10 @@ services:
       - wdb
       - proxy
       - odoo-longpolling
-      - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'openapi_test',
-    '-i', 'pos_mobile',
+    '-d', 'odoo_backup_sh',
+    '-i', 'odoo_backup_sh',
 #    '--test-enable', '--stop-after-init',
-    '--log-handler=odoo.addons.openapi:DEBUG',
     ]
 
   odoo-longpolling:
