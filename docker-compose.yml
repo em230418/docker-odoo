@@ -6,8 +6,9 @@ x-default:
   build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
-    - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
+    - ./vendor/odoo/odoo:/usr/lib/python2.7/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./config:/etc/odoo
 
   environment:
@@ -24,10 +25,10 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    '-d', 'mail',
+    '-i', 'mail',
 #    '--test-enable', '--stop-after-init',
-   '--log-handler=odoo.addons.stock:DEBUG',
+#   '--log-handler=odoo.addons.stock:DEBUG',
     ]
 
   odoo-longpolling:
