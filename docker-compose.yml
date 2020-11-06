@@ -15,33 +15,27 @@ x-default:
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
     - ./vendor/OCA/pos:/mnt/addons/pos
 
-  environment:
-    - WDB_SOCKET_SERVER=wdb
-    - WDB_NO_BROWSER_AUTO_OPEN=True
-
 services:
   odoo:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
       - proxy
       - odoo-longpolling
       - smtpfake
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'openapi_test',
-    '-i', 'pos_mobile',
+    command: [
+    '-d', 'pos_debt_notebook',
+    '-i', 'pos_debt_notebook',
 #    '--test-enable', '--stop-after-init',
-    '--log-handler=odoo.addons.openapi:DEBUG',
+    '--log-handler=odoo.addons.pos_debt_notebook:DEBUG',
     ]
 
   odoo-longpolling:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'wdb,reload,qweb,werkzeug,xml']
+    command: ['odoo', 'gevent']
 
   db:
     image: postgres:10
@@ -52,16 +46,11 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
-    ports:
-      - "5433:5432"
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['80:80', '9901:9901']
+    ports: ['85:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
-
-  wdb:
-    image: kozea/wdb:3.3.0
 
   smtpfake:
     image: mailhog/mailhog
