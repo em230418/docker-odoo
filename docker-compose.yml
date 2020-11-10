@@ -9,6 +9,7 @@ x-default:
     - ./vendor/odoo/odoo:/usr/lib/python2.7/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
+    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
     - ./config:/etc/odoo
 
   environment:
