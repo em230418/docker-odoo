@@ -10,6 +10,7 @@ x-default:
     - ./vendor/odoo/addons:/var/lib/odoo/addons/12.0
     - ./config:/etc/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
+    - ./vendor/it-projects-llc/odoo-saas-tools:/mnt/addons/odoo-saas-tools
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
     - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
