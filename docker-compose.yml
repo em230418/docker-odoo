@@ -27,6 +27,9 @@ services:
     '-d', 'odoo_backup_sh',
     '-i', 'odoo_backup_sh',
 #    '--test-enable', '--stop-after-init',
+   '--log-handler=odoo.addons.odoo_backup_sh:DEBUG',
+   '--log-handler=boto3:DEBUG',
+
     ]
 
   odoo-longpolling:
