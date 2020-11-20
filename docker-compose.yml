@@ -15,6 +15,9 @@ x-default:
     - ./vendor/it-projects-llc/sync-addons:/mnt/addons/sync-addons
     - ./vendor/it-projects-llc/website-addons:/mnt/addons/website-addons
     - ./vendor/OCA/pos:/mnt/addons/pos
+    - type: bind
+      source: ./host2db.ini
+      target: /var/lib/odoo/host2db.ini
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -30,6 +33,7 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    '--load', 'web,saas_domain_operator',
     '-d', 'openapi_test',
     '-i', 'pos_mobile',
 #    '--test-enable', '--stop-after-init',
