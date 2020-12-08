@@ -23,9 +23,10 @@ services:
       - db
       - wdb
       - proxy
+      - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'test',
-    '-i', 'arch_test',
+    '-i', 'web_debranding',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.web_debranding:DEBUG',
     ]
