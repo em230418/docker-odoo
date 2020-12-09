@@ -149,7 +149,7 @@ static_resources:
                     # 15s is hardly enough, but expose bad design.
                     # NOT FOR PRODUCTION!!!
                     # consider using OCA/queue
-                    timeout: 60s
+                    timeout: 720s
                 }
             - domains: [test.*]
               name: local_service
