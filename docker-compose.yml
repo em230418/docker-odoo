@@ -15,6 +15,8 @@ x-default:
   volumes:
     - odoo-web-data:/var/lib/odoo
     - ./config:/etc/odoo
+    - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
+    - ./vendor/odoo/addons:/mnt/addons/odoo
     - ./vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
     - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
     - ./vendor/OCA/web:/mnt/addons/web
@@ -36,7 +38,8 @@ services:
     << : *default-odoo
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'test_db',
-    '-i', 'database_expiration,database_limit_size',
+    '-i', 'access_limit_max_users',
+    '--test-enable', '--stop-after-init',
     ]
 
   odoo:
@@ -44,8 +47,8 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-i', 'saas_build_admin',
-    '--db-filter=^%d$$', '--load=web,queue_job',  '--workers=3',
+    '-u', 'saas_operator_remote',
+    '--db-filter=^%d$$', '--load=web,queue_job,saas_operator_remote',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
 #'--log-handler=odoo.models:DEBUG',
