@@ -47,7 +47,7 @@ services:
     # TODO: unify parameter passing for different cases to avoid making different branches
     # '--db-filter=^%d$$' в этой записи если не экранировать $, то вызовет ошибку
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml', '-d', 'saas',
-    '-u', 'saas_operator_remote',
+    '-i', 'saas_portal',
     '--db-filter=^%d$$', '--load=web,queue_job,saas_operator_remote',  '--workers=3',
               '--log-handler=odoo.addons.queue_job:DEBUG',
     ]
