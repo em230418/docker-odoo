@@ -11,8 +11,8 @@ mkdir -p vendor/OCA
 cd vendor/OCA
 git clone -b 13.0 https://github.com/OCA/server-auth.git --single-branch
 git clone -b 13.0 https://github.com/OCA/web.git --single-branch
-git clone -b patch-1 https://github.com/em230418/queue.git --single-branch
-git clone -b 13.0-mig-contract https://github.com/em230418/contract.git --single-branch
+git clone -b 13.0 https://github.com/OCA/queue.git --single-branch
+git clone -b 13.0 https://github.com/OCA/contract.git --single-branch
 cd ../..
 
 cd vendor/it-projects-llc
