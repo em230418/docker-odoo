@@ -8,6 +8,7 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/pp/pos-addons:/mnt/addons/pos-addons
     - ./config:/etc/odoo
 
   environment:
@@ -24,10 +25,11 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
-#    '--test-enable', '--stop-after-init',
-   '--log-handler=odoo.addons.stock:DEBUG',
+    '-d', 'pos_invoice_pay_14',
+    '-u', 'pos_invoice_pay',
+    #'--test-enable',
+    #'--stop-after-init',
+#   '--log-handler=odoo.addons.stock:DEBUG',
     ]
 
   odoo-longpolling:
