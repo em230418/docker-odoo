@@ -6,35 +6,26 @@ x-default:
   build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
-    - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
-    - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/it-projects/korvet-logistic:/mnt/addons/private
     - ./config:/etc/odoo
-
-  environment:
-    - WDB_SOCKET_SERVER=wdb
-    - WDB_NO_BROWSER_AUTO_OPEN=True
 
 services:
   odoo:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
       - proxy
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
-#    '--test-enable', '--stop-after-init',
-   '--log-handler=odoo.addons.stock:DEBUG',
+    '-d', 'korvet_logistic_dev',
+    '-i', 'base',
     ]
 
   odoo-longpolling:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
       - proxy
     command: ['odoo', 'gevent', '--dev', 'wdb,reload,qweb,werkzeug,xml']
 
@@ -52,11 +43,8 @@ services:
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['80:80', '9901:9901']
+    ports: ['80:80']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
-
-  wdb:
-    image: kozea/wdb:3.3.0
 
   smtpfake:
     image: mailhog/mailhog
