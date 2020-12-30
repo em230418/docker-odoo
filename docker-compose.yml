@@ -29,7 +29,7 @@ services:
     '-u', 'pos_invoice_pay',
     #'--test-enable',
     #'--stop-after-init',
-#   '--log-handler=odoo.addons.stock:DEBUG',
+   '--log-handler=odoo.addons.pos_longpolling:DEBUG',
     ]
 
   odoo-longpolling:
