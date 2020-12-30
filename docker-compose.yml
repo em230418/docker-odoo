@@ -8,6 +8,8 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/pr/access-addons-14.0-database-block:/mnt/addons/access-addons
+    - ./vendor/pr/web-14.0-mig-web_responsive:/mnt/addons/web
     - ./config:/etc/odoo
 
   environment:
@@ -24,10 +26,9 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    '-d', 'aap4',
+    '-i', 'database_limit_size',
 #    '--test-enable', '--stop-after-init',
-   '--log-handler=odoo.addons.stock:DEBUG',
     ]
 
   odoo-longpolling:
