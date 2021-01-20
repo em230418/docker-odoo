@@ -21,6 +21,7 @@ x-default:
     - ./vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
     - ./vendor/OCA/web:/mnt/addons/web
     - ./vendor/OCA/queue:/mnt/addons/queue
+    - ./vendor/OCA/contract:/mnt/addons/contract
     - ./vendor/OCA/server-auth:/mnt/addons/server-auth
     - ./vendor/Openworx/backend_theme:/mnt/addons/backend_theme
 
