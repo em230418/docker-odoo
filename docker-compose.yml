@@ -4,20 +4,12 @@ x-default:
   &default-odoo
   tty: true
   image: my/odoo:13.0-suga
-  depends_on:
-    - db
-    - wdb
-    - proxy
-    - mariadb
-    - smtpfake
-  ports:
-    - "8069:8069"
-    - "8072:8072"
   volumes:
     - odoo-web-data:/var/lib/odoo
+    - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
+    - ./vendor/odoo/addons:/var/lib/odoo/addons/13.0
     - ./config:/etc/odoo
     - ./vendor/eugene/private-bacula:/mnt/addons/private
-
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -37,12 +29,28 @@ services:
 
   odoo:
     << : *default-odoo
+    depends_on:
+      - db
+      - wdb
+      - proxy
+      - mariadb
+      - smtpfake
+      - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'suga',
     '--init', 'sugarodoo,sugarcrm_to_sugarodoo',
-   '--log-handler=odoo.addons.sugarodoo:DEBUG',
-   '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
+    '--log-handler=odoo.addons.sugarodoo:DEBUG',
+    '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
     ]
+
+  odoo-longpolling:
+    << : *default-odoo
+    depends_on:
+      - db
+      - wdb
+      - proxy
+    command: ['odoo', 'gevent', '--dev', 'wdb,reload,qweb,werkzeug,xml']
+
   db:
     image: postgres:10
     environment:
@@ -57,13 +65,14 @@ services:
 
   proxy:
     image: envoyproxy/envoy-alpine:v1.10.0
-    ports: ['81:80', '80:80', '9901:9901']
+    ports: ['80:80', '9901:9901']
     volumes: ['./envoy.yaml:/etc/envoy/envoy.yaml']
+
   wdb:
     image: kozea/wdb:3.3.0
-    ports: ['1984:1984']
-  smtpfake: {image: mailhog/mailhog}
 
+  smtpfake:
+    image: mailhog/mailhog
 
 volumes:
   odoo-web-data:
