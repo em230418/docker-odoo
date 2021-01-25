@@ -38,7 +38,8 @@ services:
       - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'suga',
-    '--init', 'sugarodoo,sugarcrm_to_sugarodoo',
+#    '--init', 'sugarodoo,sugarcrm_to_sugarodoo',
+    '-u', 'bacula_account',
     '--log-handler=odoo.addons.sugarodoo:DEBUG',
     '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
     ]
