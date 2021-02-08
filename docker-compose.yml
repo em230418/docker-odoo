@@ -10,6 +10,7 @@ x-default:
     - ./vendor/odoo/addons:/var/lib/odoo/addons/11.0
     - ./config:/etc/odoo
     - ./vendor/eugene/private-bluemon:/mnt/addons/private
+    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -25,8 +26,9 @@ services:
       - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'pos_ebarimt',
-    '-u', 'pos_ebarimt',
+    '-i', 'pos_ebarimt,pos_payment_qpay',
     '--log-handler=odoo.addons.pos_ebarimt:DEBUG',
+    '--log-handler=odoo.addons.pos_payment_qpay:DEBUG',
 #    '--test-enable', '--stop-after-init',
     ]
 
