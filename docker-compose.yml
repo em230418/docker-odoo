@@ -26,7 +26,8 @@ services:
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'sye2',
-    '-i', 'sye_contacts',
+    '-u', 'sye_contacts',
+#    '-i', 'sye_crm',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
