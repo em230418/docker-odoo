@@ -26,10 +26,11 @@ services:
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'sye2',
-    '-u', 'sye_contacts',
-#    '-i', 'sye_crm',
+    '-u', 'sye_sync_kis',
+#    '-i', 'sye_sync_kis',
 #    '--test-enable', '--stop-after-init',
-#   '--log-handler=odoo.addons.stock:DEBUG',
+#'--stop-after-init',
+   '--log-handler=odoo.addons.sye_sync_kis:DEBUG',
     ]
 
   odoo-longpolling:
