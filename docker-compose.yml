@@ -26,7 +26,7 @@ services:
       - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'pos_ebarimt',
-    '-i', 'pos_ebarimt,pos_payment_qpay',
+    '-u', 'sale_ebarimt',
     '--log-handler=odoo.addons.pos_ebarimt:DEBUG',
     '--log-handler=odoo.addons.pos_payment_qpay:DEBUG',
 #    '--test-enable', '--stop-after-init',
