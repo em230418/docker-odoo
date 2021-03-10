@@ -55,6 +55,24 @@ services:
       - --workers=0
       - --load=web,saas_operator_remote
 
+  odoo12:
+    tty: true
+    image: odoo:12.0
+    depends_on:
+      - db
+    ports:
+      - "12069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config2:/etc/odoo
+      - ../docker-odoo-12/vendor/it-projects-llc/access-addons:/mnt/addons/access-addons
+      - ../docker-odoo-12/vendor/it-projects-llc/saas-addons:/mnt/addons/saas-addons
+      - ../docker-odoo-12/vendor/OCA/web:/mnt/addons/web
+    command:
+      - --db-filter=.*
+      - --workers=0
+      - --load=web,saas_operator_remote
+
   dev:
     <<: *default-odoo
     command: ['-d', 'saas_test',
