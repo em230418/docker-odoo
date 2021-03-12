@@ -6,7 +6,7 @@ x-default:
   build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
-    - ./vendor/it-projects/korvet-logistic:/mnt/addons/private
+    - ./vendor/it-projects/it-projects-llc-addons:/mnt/addons/private
     - ./config:/etc/odoo
 
 services:
@@ -18,8 +18,9 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'korvet_logistic_dev',
-    '-i', 'base',
+    '-d', 'mr1_2021_02_16',
+    '-i', 'sye_base,sye_contacts,sye_crm',
+    '--load-language', 'ru_RU'
     ]
 
   odoo-longpolling:
@@ -52,3 +53,9 @@ services:
 volumes:
   odoo-web-data:
   odoo-db-data:
+
+networks:
+  default:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: 1400
