@@ -9,7 +9,9 @@ x-default:
     - ./vendor/odoo/odoo:/usr/lib/python2.7/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
     - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
+    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
     - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
+    - ./vendor/OCA/partner-contact:/mnt/addons/partner-contact
     - ./config:/etc/odoo
 
   environment:
@@ -26,8 +28,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'mail',
-    '-i', 'mail',
+    '-d', 'panama',
+    '-i', 'base_partner_merge,pos_debt_notebook_rewards',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
