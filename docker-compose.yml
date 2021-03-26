@@ -8,10 +8,8 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python2.7/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
-    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
     - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
-    - ./vendor/it-projects-llc/misc-addons:/mnt/addons/misc-addons
-    - ./vendor/OCA/partner-contact:/mnt/addons/partner-contact
+    - ./vendor/jussi-lehto:/mnt/addons/private
     - ./config:/etc/odoo
 
   environment:
@@ -26,10 +24,9 @@ services:
       - wdb
       - proxy
       - odoo-longpolling
-      - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'panama',
-    '-i', 'base_partner_merge,pos_debt_notebook_rewards',
+    '-d', 'jussi1',
+    '-i', 'pos_invoice_pay,point_of_sale_yomani',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
