@@ -6,9 +6,9 @@ x-default:
   build: .
   volumes:
     - odoo-web-data:/var/lib/odoo
-    - ./vendor/odoo/odoo:/usr/lib/python2.7/dist-packages/odoo
+    - ./vendor/odoo/openerp:/usr/lib/python2.7/dist-packages/openerp
     - ./vendor/odoo/addons:/mnt/addons/odoo
-    - ./vendor/it-projects-llc/mail-addons:/mnt/addons/mail-addons
+    - ./vendor/it-projects-llc/pos-addons:/mnt/addons/pos-addons
     - ./config:/etc/odoo
 
   environment:
@@ -20,13 +20,12 @@ services:
     << : *default-odoo
     depends_on:
       - db
-      - wdb
       - proxy
       - odoo-longpolling
       - smtpfake
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
+    command: [
     '-d', 'mail',
-    '-i', 'mail',
+    '-i', 'pos_invoice_pay',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
@@ -37,7 +36,7 @@ services:
       - db
       - wdb
       - proxy
-    command: ['odoo', 'gevent', '--dev', 'wdb,reload,qweb,werkzeug,xml']
+    command: ['openerp-server', 'gevent']
 
   db:
     image: postgres:10
