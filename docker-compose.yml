@@ -25,10 +25,10 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'panama',
-    '-i', 'payment_pagadito',
-    '--test-enable', '--stop-after-init',
-    '--log-handler=odoo.addons.base_vat_panama:DEBUG',
+    '-d', 'panama2',
+    '-i', 'portal_event_ticket_filtering',
+#    '--test-enable', '--stop-after-init',
+    '--log-handler=odoo.addons.pos_rfid:DEBUG',
     ]
 
   odoo-longpolling:
