@@ -10,6 +10,7 @@ x-default:
     - ./vendor/odoo/addons:/var/lib/odoo/addons/13.0
     - ./config:/etc/odoo
     - ./vendor/eugene/private-bacula:/mnt/addons/private
+    - ./vendor/enterprise:/mnt/addons/enterprise
 
   environment:
     - WDB_SOCKET_SERVER=wdb
@@ -33,15 +34,15 @@ services:
       - db
       - wdb
       - proxy
-      - mariadb
       - smtpfake
       - odoo-longpolling
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'suga',
-#    '--init', 'sugarodoo,sugarcrm_to_sugarodoo',
-    '-u', 'bacula_account',
-    '--log-handler=odoo.addons.sugarodoo:DEBUG',
-    '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
+    '-d', 'suga2',
+    '-i', 'l10n_generic_coa,account_bank_statement_import_camt',
+#    '-u', 'bacula_account',
+#    '--log-handler=odoo.addons.sugarodoo:DEBUG',
+#    '--log-handler=odoo.addons.sugarcrm_to_sugarodoo:DEBUG',
+#    '--test-enable', '--stop-after-init',
     ]
 
   odoo-longpolling:
