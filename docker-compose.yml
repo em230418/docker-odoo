@@ -8,6 +8,8 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/pp/ohada:/mnt/addons/private
+    - ./vendor/enterprise:/mnt/addons/enterprise
     - ./config:/etc/odoo
 
   environment:
@@ -24,8 +26,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    '-d', 'ohada_reports',
+    '-i', 'ohada_reports',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
     ]
