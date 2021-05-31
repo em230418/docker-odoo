@@ -14,7 +14,7 @@ static_resources:
     type: strict_dns
   - connect_timeout: 0.25s
     hosts:
-    - socket_address: {address: odoo, port_value: 8072}
+    - socket_address: {address: odoo-longpolling, port_value: 8072}
     lb_policy: round_robin
     max_requests_per_connection: 1
     name: target_odoo_longpolling
