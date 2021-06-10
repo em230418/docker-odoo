@@ -8,6 +8,7 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/dev/private-medifab:/mnt/addons/private
     - ./config:/etc/odoo
 
   environment:
@@ -24,8 +25,9 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    '-d', 'medifab',
+    '-i', 'trial_crm',
+    '-u', 'trial_crm',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
     ]
