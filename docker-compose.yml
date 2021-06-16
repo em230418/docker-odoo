@@ -25,8 +25,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'sye3',
-    '-u', 'sye_dadata',
+    '-d', 'sye_test1',
+#    '-u', 'sye_dadata',
     '-i', 'sye_dadata',
 #    '--test-enable', '--stop-after-init',
 #'--stop-after-init',
