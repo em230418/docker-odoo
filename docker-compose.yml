@@ -27,7 +27,8 @@ services:
       - smtpfake
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'csc',
-    '-i', 'csc_sale',
+#    '-i', 'csc_sale',
+    '-u', 'csc_product',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
