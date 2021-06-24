@@ -24,10 +24,10 @@ services:
       - proxy
       - odoo-longpolling
       - smtpfake
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'medifab',
-    '-i', 'trial_crm',
-    '-u', 'trial_crm',
+    command: ['--dev', 'reload,qweb,werkzeug,xml',
+    '-d', 'medifab_tranfser',
+    '-i', 'transfer',
+#    '-u', 'trial_crm',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
     ]
