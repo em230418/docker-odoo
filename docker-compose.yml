@@ -25,8 +25,8 @@ services:
       - odoo-longpolling
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
-    '-d', 'medifab_sale_stock',
-    '-i', 'trial',
+    '-d', 'transfer2',
+    '-i', 'transfer_trial',
 #    '-u', 'transfer',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
