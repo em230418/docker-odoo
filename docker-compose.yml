@@ -26,7 +26,7 @@ services:
       - smtpfake
     command: ['--dev', 'reload,qweb,werkzeug,xml',
     '-d', 'stock_port',
-    '-i', 'stock_account_company_fix',
+    '-i', 'resource_stock',
 #    '-u', 'transfer',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
