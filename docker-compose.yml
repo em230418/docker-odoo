@@ -28,7 +28,7 @@ services:
     command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
     '-d', 'csc',
 #    '-i', 'csc_sale',
-    '-u', 'csc_product',
+    '-u', 'csc_sale',
 #    '--test-enable', '--stop-after-init',
 #   '--log-handler=odoo.addons.stock:DEBUG',
     ]
