@@ -8,6 +8,8 @@ x-default:
     - odoo-web-data:/var/lib/odoo
     - ./vendor/odoo/odoo:/usr/lib/python3/dist-packages/odoo
     - ./vendor/odoo/addons:/mnt/addons/odoo
+    - ./vendor/enterprise:/mnt/addons/enterprise
+    - ./vendor/dev/l10n_sn_hr_payroll_agreement:/mnt/addons/private
     - ./config:/etc/odoo
 
   environment:
@@ -22,10 +24,9 @@ services:
       - wdb
       - proxy
       - odoo-longpolling
-      - smtpfake
-    command: ['--dev', 'wdb,reload,qweb,werkzeug,xml',
-    '-d', 'stock_tst',
-    '-i', 'stock',
+    command: ['--dev', 'reload,qweb,werkzeug,xml',
+    '-d', 'basiru_payroll',
+    '-i', 'l10n_sn_hr_payroll_agreement',
 #    '--test-enable', '--stop-after-init',
    '--log-handler=odoo.addons.stock:DEBUG',
     ]
